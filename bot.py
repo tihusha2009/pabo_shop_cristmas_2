@@ -1,6 +1,7 @@
 import re
+import os
+import json
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -17,6 +18,11 @@ from datetime import datetime
 BOT_TOKEN = "8640113508:AAHhQlvZO4CV9xPi_JsrgzCyaJHr3TeGIHY"
 ADMIN_IDS = [5123455277, 5050181546]
 SHEET_ID = "1cgMBDudmP0b6gFuHXeyQ3Fw-ZeLCwEkR8KiFZC_UwKQ"
+
+# --- АВТОРИЗАЦИЯ GOOGLE SHEETS ---
+creds_json = os.environ.get('GOOGLE_CREDS_JSON')
+creds_dict = json.loads(creds_json)
+client = gspread.service_account_from_dict(creds_dict)
 
 bot = Bot(token=BOT_TOKEN)
 storage = MemoryStorage()
